@@ -1,0 +1,465 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/login:
+    post:
+      summary: ''
+      operationId: postApiLogin
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: rbechtelar@example.com
+                password:
+                  type: string
+                  description: ''
+                  example: voluptatibus
+              required:
+                - email
+                - password
+      security: []
+  /api/register:
+    post:
+      summary: ''
+      operationId: postApiRegister
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: cdavis@example.com
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: 'bm@t!\$,P?<'
+                name:
+                  type: string
+                  description: ''
+                  example: harum
+              required:
+                - email
+                - password
+                - name
+      security: []
+  /api/404:
+    get:
+      summary: ''
+      operationId: getApi404
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  msg: 'not logged in yet.'
+                  code: 401
+                properties:
+                  msg:
+                    type: string
+                    example: 'not logged in yet.'
+                  code:
+                    type: integer
+                    example: 401
+      tags:
+        - Endpoints
+      security: []
+  /api/notifications:
+    get:
+      summary: ''
+      operationId: getApiNotifications
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/notifications/{id}':
+    get:
+      summary: ''
+      operationId: getApiNotificationsId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the notification.'
+        example: similique
+        required: true
+        schema:
+          type: string
+  /api/read/notifications:
+    post:
+      summary: ''
+      operationId: postApiReadNotifications
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  '/api/read/notifications/{id}':
+    post:
+      summary: ''
+      operationId: postApiReadNotificationsId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the notification.'
+        example: temporibus
+        required: true
+        schema:
+          type: string
+  /api/unread/notifications:
+    get:
+      summary: ''
+      operationId: getApiUnreadNotifications
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/unread/notifications/{id}':
+    get:
+      summary: ''
+      operationId: getApiUnreadNotificationsId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the notification.'
+        example: ea
+        required: true
+        schema:
+          type: string
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/my-hotel:
+    get:
+      summary: ''
+      operationId: getApiMyHotel
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/add-new-employee:
+    post:
+      summary: ''
+      operationId: postApiAddNewEmployee
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: epowlowski@example.net
+                password:
+                  type: string
+                  description: 'Must be at least 6 characters.'
+                  example: 'Ab00qm?-R88t'
+                name:
+                  type: string
+                  description: ''
+                  example: quos
+              required:
+                - email
+                - password
+                - name
+      security: []
+  /api/add_new_room:
+    post:
+      summary: ''
+      operationId: postApiAdd_new_room
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: 'Must be one of <code>single</code> or <code>double</code>.'
+                  example: single
+                number:
+                  type: string
+                  description: ''
+                  example: eius
+                price:
+                  type: number
+                  description: ''
+                  example: 5139.6115307
+                images:
+                  type: array
+                  description: 'Must be an image.'
+                  items:
+                    type: string
+                    format: binary
+              required:
+                - type
+                - number
+                - price
+      security: []
+  /api/hotels:
+    get:
+      summary: ''
+      operationId: getApiHotels
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  '/api/hotels/{id}':
+    get:
+      summary: ''
+      operationId: getApiHotelsId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the hotel.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/request-occupation:
+    post:
+      summary: ''
+      operationId: postApiRequestOccupation
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                room_id:
+                  type: string
+                  description: ''
+                  example: eligendi
+                from:
+                  type: string
+                  description: ''
+                  example: quia
+                to:
+                  type: string
+                  description: ''
+                  example: quasi
+              required:
+                - room_id
+                - from
+                - to
+      security: []
+  /api/response-to-occupation-request:
+    post:
+      summary: ''
+      operationId: postApiResponseToOccupationRequest
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                request_id:
+                  type: string
+                  description: ''
+                  example: laboriosam
+                status:
+                  type: string
+                  description: 'Must be one of <code>rejected</code> or <code>approved</code>.'
+                  example: rejected
+              required:
+                - request_id
+                - status
+      security: []
+tags:
+  -
+    name: Endpoints
+    description: ''
