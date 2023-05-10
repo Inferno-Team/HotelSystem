@@ -33,7 +33,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['middleware' => ['is_customer']], function () {
         Route::get('/hotels', [HotelController::class, 'getAll']);
         Route::get('/hotels/{id}', [HotelController::class, 'getHotel']);
-        Route::post('/request-occupation', [RequestController::class, 'requestOccupation']);
+        Route::post('/request-occupation-room', [RequestController::class, 'requestOccupationRoom']);
+
+        Route::get('/get-my-reservations',[HotelController::class,'getMyReservations']);
+        Route::get('/get-hotel-parking-spaces/{id}',[HotelController::class,'getHotelParkingSpace']);
+        Route::post('/check-garage',[HotelController::class,'checkGarage']);
+        Route::post('/request-occupation-garage', [RequestController::class, 'requestOccupationGarage']);
     });
     Route::group(['middleware' => ['is_employee']], function () {
         Route::post('/response-to-occupation-request',[OccupationController::class,'responseToRequest']);

@@ -17,6 +17,7 @@ class CreateCustomerParkingsTable extends Migration
             $table->id();
             $table->foreignId('customer_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('parking_id')->references('id')->on('parking_spaces')->cascadeOnDelete();
+
             $table->timestamps();
         });
     }
