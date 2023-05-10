@@ -42,5 +42,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
     Route::group(['middleware' => ['is_employee']], function () {
         Route::post('/response-to-occupation-request',[OccupationController::class,'responseToRequest']);
+        Route::post('/response-to-parking-occupation-request',[OccupationController::class,'responseToParkingRequest']);
     });
 });

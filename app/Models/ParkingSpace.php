@@ -2,19 +2,35 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ParkingSpace extends Model
 {
     use HasFactory;
+    protected $appends = ['is_occupied'];
+
     protected $fillable = [
         'garage_id',
         'number',
         'price'
     ];
-
+    public function parking_customer(): HasMany
+    {
+        return $this->hasMany(CustomerParking::class, 'parking_id');
+    }
+    public function isOccupied(): Attribute
+    {
+        return new Attribute(
+            get: function ($value) {
+                $customer = $this->parking_customer->where('valid', true);
+                return isset($customer) && count($this->room_customer) > 0;
+            }
+        );
+    }
     public function garage(): BelongsTo
     {
         return $this->belongsTo(Garage::class, 'garage_id');

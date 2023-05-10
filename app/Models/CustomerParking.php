@@ -15,7 +15,9 @@ class CustomerParking extends Model
 
     protected $fillable = [
         'customer_id',
-        'parking_id'
+        'parking_id',
+        'from',
+        'to'
     ];
     public function valid(): Attribute
     {
