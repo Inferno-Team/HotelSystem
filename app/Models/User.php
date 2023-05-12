@@ -44,7 +44,8 @@ class User extends Authenticatable
             $this->remember_token = $token;
             $this->save();
         }
-        return $token;
+
+        return $this->createToken('authToken')->plainTextToken;
     }
 
     public function hotel(): HasOne
