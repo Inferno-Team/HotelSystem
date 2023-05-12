@@ -23,7 +23,7 @@ class FolderHelper
     $path = "images/rooms/$slug/";
     $imagesURL = [];
     foreach ($imagesName as $image) {
-      $imagesURL[] = $http . '/' . $path . $image->file_name;
+      $imagesURL[] = $http . '/public/' . $path . $image->file_name;
     }
     return $imagesURL;
   }
