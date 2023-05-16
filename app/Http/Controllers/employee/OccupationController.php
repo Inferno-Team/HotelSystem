@@ -86,7 +86,7 @@ class OccupationController extends Controller
             $customer->notify(new ResponseToOccupationNotification($oRequest->status, $oRequest->id));
             if ($oRequest->status == 'approved') {
                 CustomerParking::create([
-                    'parking_id' => $oRequest->room_id,
+                    'parking_id' => $oRequest->parking_space_id,
                     'customer_id' => $oRequest->customer_id,
                     'from' => $oRequest->from,
                     'to' => $oRequest->to,
