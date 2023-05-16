@@ -27,7 +27,7 @@ class ParkingSpace extends Model
         return new Attribute(
             get: function ($value) {
                 $customer = $this->parking_customer->where('valid', true);
-                return isset($customer) && count($this->room_customer) > 0;
+                return isset($customer) && count($this->parking_customer) > 0;
             }
         );
     }
