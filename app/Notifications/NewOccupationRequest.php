@@ -50,8 +50,8 @@ class NewOccupationRequest extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => "you have a new request to room ". $this->oRequerst->room->number,
-            'type' => "New Occupation Request",
+            'message' => "you have a new request to room type : " . $this->oRequerst->room_type,
+            'type' => "New Room Occupation Request",
             'request_id' => $this->oRequerst->id,
         ];
     }

@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RoomFactory extends Factory
+class RoomImageFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,7 @@ class RoomFactory extends Factory
     public function definition()
     {
         return [
-            'number' => $this->faker->unique()->numberBetween(10,1000),
-            'price' => $this->faker->numberBetween(10_000, 40_000),
+            //
         ];
     }
 }

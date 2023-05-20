@@ -23,9 +23,8 @@ class CustomerParking extends Model
     {
         return new Attribute(
             get: function ($value) {
-                $startDate = Carbon::createFromTimestamp($this->from);
-                $endDate = Carbon::createFromTimestamp($this->to);
-
+                $startDate = Carbon::createFromDate($this->from);
+                $endDate = Carbon::createFromDate($this->to);
                 return Carbon::now()->between($startDate, $endDate);
             }
         );

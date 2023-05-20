@@ -17,7 +17,7 @@ class CreateGarageOccupationRequestsTable extends Migration
         Schema::create('garage_occupation_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreignId('parking_space_id')->references('id')->on('parking_spaces')->cascadeOnDelete();
+            // $table->foreignId('parking_space_id')->references('id')->on('parking_spaces')->cascadeOnDelete();
             $table->timestamp('from')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('to')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->double('price')->default(0.0);

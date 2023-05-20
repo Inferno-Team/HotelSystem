@@ -29,7 +29,7 @@ class OccupationGarageRequest extends FormRequest
     public function rules()
     {
         return [
-            'space_id' => 'required|exists:parking_spaces,id',
+            // 'space_id' => 'required|exists:parking_spaces,id',
             'from' => 'required|string',
             'to' => 'required|string',
         ];
@@ -46,7 +46,7 @@ class OccupationGarageRequest extends FormRequest
     {
         return [
             'customer_id' => Auth::user()->id,
-            'parking_space_id' => $this->space_id,
+            // 'parking_space_id' => $this->space_id,
             'from' => Carbon::parse($this->from)->format("Y-m-d h:i:s"),
             'to' => Carbon::parse($this->to)->format("Y-m-d h:i:s"),
         ];

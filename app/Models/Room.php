@@ -23,7 +23,7 @@ class Room extends Model
     {
         return new Attribute(
             get: function ($value) {
-                $customer = $this->room_customer->where('valid', true);
+                $customer = $this->room_customer->where('valid', true)->first();
                 return isset($customer) && count($this->room_customer) > 0;
             }
         );

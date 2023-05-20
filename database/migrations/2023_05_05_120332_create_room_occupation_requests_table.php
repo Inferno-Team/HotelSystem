@@ -17,7 +17,7 @@ class CreateRoomOccupationRequestsTable extends Migration
         Schema::create('room_occupation_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreignId('room_id')->references('id')->on('rooms')->cascadeOnDelete();
+            // $table->foreignId('room_id')->references('id')->on('rooms')->cascadeOnDelete();
             $table->timestamp('from')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('to')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->double('price')->default(0.0);

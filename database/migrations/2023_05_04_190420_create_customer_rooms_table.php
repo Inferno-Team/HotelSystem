@@ -16,8 +16,8 @@ class CreateCustomerRoomsTable extends Migration
     {
         Schema::create('customer_rooms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('room_id')->unique()->references('id')->on('rooms')->cascadeOnDelete();
-            $table->foreignId('customer_id')->unique()->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('room_id')->references('id')->on('rooms')->cascadeOnDelete();
+            $table->foreignId('customer_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamp('from')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('to')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();

@@ -47,7 +47,8 @@ class ResponseToOccupationNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => "Your request's status had been updated to : " . $this->status,
+            'message' => $this->status == -1 ? 'There Is No Parking Space Available Right Now Please Try Again Later.'
+                : "Your request's status had been updated to : " . $this->status,
             'type' => "Response to Occupation Request",
             'request_id' => $this->request_id,
         ];

@@ -51,8 +51,8 @@ class NewParkingSpaceOccupationRequest extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => "you have a new request to parking space ". $this->oRequerst->parking_space->number,
-            'type' => "New Occupation Request",
+            'message' => "You have a new request to parking space.",
+            'type' => "New Parking Space Occupation Request",
             'request_id' => $this->oRequerst->id,
         ];
     }

@@ -12,7 +12,7 @@ class GarageOccupationRequest extends Model
     use HasFactory;
     protected $fillable = [
         'customer_id',
-        'parking_space_id',
+        // 'parking_space_id',
         'from',
         'to',
         'price'

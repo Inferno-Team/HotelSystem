@@ -11,7 +11,8 @@ class RoomOccupationRequest extends Model
     use HasFactory;
     protected $fillable = [
         'customer_id',
-        'room_id',
+        // 'room_id',
+        'room_type',
         'from',
         'to',
         'price'
@@ -19,9 +20,5 @@ class RoomOccupationRequest extends Model
     public function customer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'customer_id');
-    }
-    public function room(): BelongsTo
-    {
-        return $this->belongsTo(Room::class, 'room_id');
     }
 }

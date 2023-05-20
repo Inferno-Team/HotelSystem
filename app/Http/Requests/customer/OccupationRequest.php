@@ -29,7 +29,7 @@ class OccupationRequest extends FormRequest
     public function rules()
     {
         return [
-            'room_id' => 'required|exists:rooms,id',
+            'type' => 'required|in:double,classic,family,junior,single',
             'from' => 'required|string',
             'to' => 'required|string',
         ];
@@ -46,7 +46,8 @@ class OccupationRequest extends FormRequest
     {
         return [
             'customer_id' => Auth::user()->id,
-            'room_id' => $this->room_id,
+            // 'room_id' => $this->room_id,
+            'room_type' => $this->type,
             'from' => Carbon::parse($this->from)->format("Y-m-d h:i:s"),
             'to' => Carbon::parse($this->to)->format("Y-m-d h:i:s"),
         ];
