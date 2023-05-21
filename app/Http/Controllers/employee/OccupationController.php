@@ -70,7 +70,6 @@ class OccupationController extends Controller
         $oRequest->status = $request->status;
         $customer = $oRequest->customer;
         $spaces = ParkingSpace::get()->filter(fn ($space) => !$space->is_occupied);
-        return count($spaces);
         if (count($spaces) == 0) {
             $customer->notify(new ResponseToOccupationNotification($oRequest->status, $oRequest->id));
             return LocalResponse::returnMessage('There Is No Parking Space available');
