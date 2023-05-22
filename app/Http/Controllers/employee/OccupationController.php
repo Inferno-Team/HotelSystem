@@ -95,4 +95,13 @@ class OccupationController extends Controller
         }
         return LocalResponse::returnData('space', ParkingSpace::find($parkingSpace->id), "request status updated");
     }
+    public function getAll()
+    {
+        $roomRequests = RoomOccupationRequest::get()->filter(fn ($item) => $item->is_request);
+        $parkingRequests = GarageOccupationRequest::get()->filter(fn ($item) => $item->is_request);
+        return LocalResponse::returnData('requests', [
+            'room' => $roomRequests,
+            'park' => $parkingRequests
+        ]);
+    }
 }

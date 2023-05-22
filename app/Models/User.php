@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -18,6 +20,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $appends = ['parking'];
     protected $fillable = [
         'name',
         'email',
@@ -50,5 +53,15 @@ class User extends Authenticatable
     public function hotel(): HasOne
     {
         return $this->hasOne(Hotel::class, 'manager_id');
+    }
+    public function customer_parking(): HasMany
+    {
+        return $this->hasMany(CustomerParking::class, 'customer_id');
+    }
+    public function parking(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->customer_parking->where('valid',true)->first(),
+        );
     }
 }

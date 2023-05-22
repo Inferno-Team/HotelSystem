@@ -10,13 +10,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class GarageOccupationRequest extends Model
 {
     use HasFactory;
+    protected $append = ['is_request'];
     protected $fillable = [
         'customer_id',
         // 'parking_space_id',
         'from',
         'to',
-        'price'
+        'price',
+        'status'
     ];
+    public function isRequest(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->status == 'requested',
+        );
+    }
 
     public function customer(): BelongsTo
     {

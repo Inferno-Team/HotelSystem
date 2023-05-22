@@ -9,7 +9,7 @@ use App\Http\Traits\LocalResponse;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UtilesController;
 use App\Http\Controllers\manager\RoomController;
-
+use App\Http\Requests\customer\OccupationRequest;
 
 Route::post('/login', [UtilesController::class, 'login']);
 Route::post('/register', [UtilesController::class, 'register']);
@@ -35,13 +35,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/hotels/{id}', [HotelController::class, 'getHotel']);
         Route::post('/request-occupation-room', [RequestController::class, 'requestOccupationRoom']);
 
-        Route::get('/get-my-reservations',[HotelController::class,'getMyReservations']);
-        Route::get('/get-hotel-parking-spaces/{id}',[HotelController::class,'getHotelParkingSpace']);
-        Route::post('/check-garage',[HotelController::class,'checkGarage']);
+        Route::get('/get-my-booking', [HotelController::class, 'getMyReservations']);
+        Route::get('/get-hotel-parking-spaces/{id}', [HotelController::class, 'getHotelParkingSpace']);
+        Route::post('/check-garage', [HotelController::class, 'checkGarage']);
         Route::post('/request-occupation-garage', [RequestController::class, 'requestOccupationGarage']);
     });
     Route::group(['middleware' => ['is_employee']], function () {
-        Route::post('/response-to-occupation-request',[OccupationController::class,'responseToRequest']);
-        Route::post('/response-to-parking-occupation-request',[OccupationController::class,'responseToParkingRequest']);
+        Route::get('/get-all-requests',[OccupationController::class,'getAll']);
+        Route::post('/response-to-occupation-request', [OccupationController::class, 'responseToRequest']);
+        Route::post('/response-to-parking-occupation-request', [OccupationController::class, 'responseToParkingRequest']);
     });
 });

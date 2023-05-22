@@ -21,9 +21,12 @@ class UtilesController extends Controller
             ]);
 
         $token = $user->getToken();
+        if ($user->type == 'customer') {
+            // $user->parking = $user->customer_parking;
+        }
         return LocalResponse::returnData("login", [
             'token' => $token,
-            'user' => $user
+            'user' => $user,
         ]);
     }
     public function register(RegisterRequest $request)
