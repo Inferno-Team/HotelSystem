@@ -97,8 +97,8 @@ class OccupationController extends Controller
     }
     public function getAll()
     {
-        $roomRequests = RoomOccupationRequest::get()->filter(fn ($item) => $item->is_request);
-        $parkingRequests = GarageOccupationRequest::get()->filter(fn ($item) => $item->is_request);
+        $roomRequests = RoomOccupationRequest::get()->filter(fn ($item) => $item->is_request)->values();
+        $parkingRequests = GarageOccupationRequest::get()->filter(fn ($item) => $item->is_request)->values();
         return LocalResponse::returnData('requests', [
             'room' => $roomRequests,
             'park' => $parkingRequests
