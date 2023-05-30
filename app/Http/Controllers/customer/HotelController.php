@@ -62,10 +62,12 @@ class HotelController extends Controller
         $customer = Auth::user();
         // get all this user reservations [ room , parking-space , conference-room ]
         $customerParking  = CustomerParking::where('customer_id', $customer->id)->first();
-        $customerRoom = CustomerRoom::where('customer_id', $customer->id)->first();
+        $customerRooms = CustomerRoom::where('customer_id', $customer->id)->get()->filter(function($item){
+            return $item->valid;
+        })->values();
         return LocalResponse::returnData('reservations', [
             'garage' => $customerParking != null ? ($customerParking->valid ? $customerParking : null) : null,
-            'room' => $customerRoom != null ? ($customerRoom->valid ? $customerRoom : null) : null
+            'room' => $customerRooms
         ], 'your reservations');
     }
     public function getHotelParkingSpace(int $id)
