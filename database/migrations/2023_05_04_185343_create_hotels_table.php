@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateHotelsTable extends Migration
@@ -20,6 +21,11 @@ class CreateHotelsTable extends Migration
             $table->string('location');
             $table->timestamps();
         });
+        DB::table('hotels')->insert([
+            'manager_id' => 1,
+            'name' => 'Hotel',
+            'location' => 'Syria,Aleppo',
+        ]);
     }
 
     /**
