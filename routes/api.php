@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\customer\FavController;
 use App\Http\Controllers\customer\HotelController;
 use App\Http\Controllers\customer\RequestController;
 use App\Http\Controllers\employee\OccupationController;
@@ -34,6 +35,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::get('/hotels', [HotelController::class, 'getAll']);
         Route::get('/hotels/{id}', [HotelController::class, 'getHotel']);
         Route::post('/request-occupation-room', [RequestController::class, 'requestOccupationRoom']);
+
+        Route::post('/add-to-fav',[FavController::class,'addToFav']);
+        Route::post('/remove-from-fav',[FavController::class,'reomveFromFav']);
+        Route::get('/get-my-fav',[FavController::class,'getMyFav']);
 
         Route::get('/get-my-booking', [HotelController::class, 'getMyReservations']);
         Route::get('/get-hotel-parking-spaces/{id}', [HotelController::class, 'getHotelParkingSpace']);
