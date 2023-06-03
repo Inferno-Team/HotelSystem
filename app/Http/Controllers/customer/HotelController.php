@@ -26,7 +26,7 @@ class HotelController extends Controller
     public function getHotel(int $id)
     {
         $customer = Auth::user();
-        $hotel = Hotel::where('id', $id)->with('manager', 'rooms', 'fav_customer')->get()
+        $hotel = Hotel::where('id', $id)->with('manager', 'rooms.fav_customer')->get()
             ->map(function ($hotel) use ($customer) {
                 return (object)[
                     'name' => $hotel->name,
