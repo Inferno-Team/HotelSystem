@@ -19,6 +19,10 @@ class Room extends Model
         'type',
         'price'
     ];
+    public function fav_customer(): HasMany
+    {
+        return $this->hasMany(CustomerFav::class, 'room_id');
+    }
     public function isOccupied(): Attribute
     {
         return new Attribute(

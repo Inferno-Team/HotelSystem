@@ -6,6 +6,7 @@ use App\Models\Hotel;
 use Illuminate\Http\Request;
 use App\Http\Traits\LocalResponse;
 use App\Http\Controllers\Controller;
+use App\Models\CustomerFav;
 use App\Models\CustomerParking;
 use App\Models\CustomerRoom;
 use App\Models\Garage;
@@ -24,7 +25,25 @@ class HotelController extends Controller
     }
     public function getHotel(int $id)
     {
-        $hotel = Hotel::where('id', $id)->with('manager', 'rooms')->first();
+        $customer = Auth::user();
+        $hotel = Hotel::where('id', $id)->with('manager', 'rooms', 'fav_customer')->get()
+            ->map(function ($hotel) use ($customer) {
+                return (object)[
+                    'name' => $hotel->name,
+                    'location' => $hotel->location,
+                    "rooms" => $hotel->rooms->map(function ($room) use ($customer) {
+                        return (object)[
+                            "id" => $room->id,
+                            "number" => $room->number,
+                            "type" => $room->type,
+                            "price" => $room->price,
+                            "is_occupied" => $room->is_occupied,
+                            "images" => $room->images,
+                            "is_fav" => $room->fav_customer->where('customer_id', $customer->id)->first() !== null
+                        ];
+                    }),
+                ];
+            })->first();
         return LocalResponse::returnData('hotel', $hotel);
     }
     public function checkGarage()
@@ -62,7 +81,7 @@ class HotelController extends Controller
         $customer = Auth::user();
         // get all this user reservations [ room , parking-space , conference-room ]
         $customerParking  = CustomerParking::where('customer_id', $customer->id)->first();
-        $customerRooms = CustomerRoom::where('customer_id', $customer->id)->get()->filter(function($item){
+        $customerRooms = CustomerRoom::where('customer_id', $customer->id)->get()->filter(function ($item) {
             return $item->valid;
         })->values();
         return LocalResponse::returnData('reservations', [

@@ -28,7 +28,7 @@ class AddNewRoomRequest extends FormRequest
     public function rules()
     {
         return [
-            'type' => 'required|in:single,double',
+            'type' => 'required|in:double,classic,family,junior,single',
             "number" => 'required|unique:rooms,number',
             'price' => 'required|numeric',
             'images' => 'array',
