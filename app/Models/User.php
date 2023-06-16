@@ -21,6 +21,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $appends = ['parking'];
+
     protected $fillable = [
         'name',
         'email',

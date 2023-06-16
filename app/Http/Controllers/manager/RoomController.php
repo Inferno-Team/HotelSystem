@@ -27,7 +27,7 @@ class RoomController extends Controller
                 $hotel = Auth::user()->hotel;
                 $images = $request->file('images');
                 foreach ($images as $image) {
-                    $slug = Str::slug("$hotel->name" . '-' . $room->number);
+                    $slug = Str::slug("$hotel->name" . '-' . $room->number); // new room => new%20room => new-hotel-21
                     $name = time() + $index++;
                     $image_name = FolderHelper::uploadFileOnPublic($image, "images/rooms/$slug", $name);
                     RoomImage::create([

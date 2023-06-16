@@ -13,17 +13,15 @@ class UtilesController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        $user = User::where('email', "like", $request->email)->first();
+        $user = User::where('email', "like", $request->email)->first(); // select * from users where email like '$request->email' limit 1
 
         if (!Hash::check($request->password, $user->password))
             return LocalResponse::returnError('البيانات غير متوافقة', 400, [
-                'password' => ['كملة السر خطأ']
+                'password' => ['password inccorent']
             ]);
 
         $token = $user->getToken();
-        if ($user->type == 'customer') {
-            // $user->parking = $user->customer_parking;
-        }
+
         return LocalResponse::returnData("login", [
             'token' => $token,
             'user' => $user,

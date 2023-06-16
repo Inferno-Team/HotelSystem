@@ -23,10 +23,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/read/notifications/{id}', [NotificationController::class, 'read']);
     Route::get('/unread/notifications', [NotificationController::class, 'getAllUnRead']);
     Route::get('/unread/notifications/{id}', [NotificationController::class, 'getUnReadNotification']);
-
+    Route::get('/user', fn (Request $request) => $request->user());
 
     Route::group(['middleware' => ['is_manager']], function () {
-        Route::get('/user', fn (Request $request) => $request->user());
+
         Route::get('/my-hotel', [\App\Http\Controllers\manager\HotelController::class, 'myHotel']);
         Route::post('/add-new-employee', [\App\Http\Controllers\manager\HotelController::class, 'addNewEmployee']);
         Route::post('/add_new_room', [RoomController::class, 'addNewRoom']);
