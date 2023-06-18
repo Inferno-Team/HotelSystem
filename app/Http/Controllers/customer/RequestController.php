@@ -3,18 +3,21 @@
 namespace App\Http\Controllers\customer;
 
 use App\Models\Room;
+use App\Models\User;
+use App\Models\Hotel;
+use App\Models\ParkingSpace;
 use Illuminate\Http\Request;
 use App\Http\Traits\LocalResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\customer\OccupationGarageRequest;
 use App\Models\RoomOccupationRequest;
-use App\Http\Requests\customer\OccupationRequest;
 use App\Models\GarageOccupationRequest;
-use App\Models\Hotel;
-use App\Models\ParkingSpace;
-use App\Models\User;
 use App\Notifications\NewOccupationRequest;
+use App\Http\Requests\customer\OccupationRequest;
+use App\Http\Requests\customer\OccupationGarageRequest;
 use App\Notifications\NewParkingSpaceOccupationRequest;
+use App\Http\Requests\customer\OccupationMeetingRoomRequest;
+use App\Models\MeetingRoomOccupationRequest;
+use App\Notifications\NewMeetingRoomOccupationRequest;
 
 class RequestController extends Controller
 {
@@ -22,7 +25,7 @@ class RequestController extends Controller
     {
         // $room = Room::where('id', $request->room_id)->first();
         $oRequerst = RoomOccupationRequest::create($request->values());
-        $hotel = Hotel::where('id',1)->with('employees')->first();
+        $hotel = Hotel::where('id', 1)->with('employees')->first();
         // $oRequerst->price = $room->price;
         $oRequerst->save();
         $manager = $hotel->manager;
@@ -40,13 +43,26 @@ class RequestController extends Controller
         $oRequerst = GarageOccupationRequest::create($request->values());
         // $oRequerst->price = $parkingSpace->price;
         // $oRequerst->save();
-        $hotel = Hotel::where('id',1)->first();
+        $hotel = Hotel::where('id', 1)->first();
 
         $manager = $hotel->manager;
         $employess = $hotel->employees;
         $manager->notify(new NewParkingSpaceOccupationRequest($oRequerst));
         foreach ($employess as $emp) {
             $emp->employee->notify(new NewParkingSpaceOccupationRequest($oRequerst));
+        }
+        return LocalResponse::returnData("request", $oRequerst, 'request saved.');
+    }
+    public function requestOccupationMeetingRoom(OccupationMeetingRoomRequest $request)
+    {
+        $oRequerst = MeetingRoomOccupationRequest::create($request->values());
+        $hotel = Hotel::where('id', 1)->with('employees')->first();
+        $oRequerst->save();
+        $manager = $hotel->manager;
+        $employess = $hotel->employees;
+        $manager->notify(new NewMeetingRoomOccupationRequest($oRequerst));
+        foreach ($employess as $emp) {
+            $emp->employee->notify(new NewMeetingRoomOccupationRequest($oRequerst));
         }
         return LocalResponse::returnData("request", $oRequerst, 'request saved.');
     }

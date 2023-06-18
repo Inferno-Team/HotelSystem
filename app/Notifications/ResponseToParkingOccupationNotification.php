@@ -7,9 +7,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ResponseToOccupationNotification extends Notification
+class ResponseToParkingOccupationNotification extends Notification
 {
     use Queueable;
+
+    /**
+     * Create a new notification instance.
+     *
+     * @return void
+     */
 
     public $status;
     public $request_id;
@@ -18,6 +24,7 @@ class ResponseToOccupationNotification extends Notification
         $this->status = $status;
         $this->request_id = $request_id;
     }
+
 
     /**
      * Get the notification's delivery channels.
@@ -37,7 +44,6 @@ class ResponseToOccupationNotification extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
 
-
     /**
      * Get the array representation of the notification.
      *
@@ -47,7 +53,7 @@ class ResponseToOccupationNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => $this->status == -1 ? 'There Is No Room Available Right Now Please Try Again Later.'
+            'message' => $this->status == -1 ? 'There Is No Parking Space Available Right Now Please Try Again Later.'
                 : "Your request's status had been updated to : " . $this->status,
             'type' => "Response to Occupation Request",
             'request_id' => $this->request_id,

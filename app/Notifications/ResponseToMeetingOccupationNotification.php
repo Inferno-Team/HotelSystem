@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ResponseToOccupationNotification extends Notification
+class ResponseToMeetingOccupationNotification extends Notification
 {
     use Queueable;
 
@@ -47,9 +47,10 @@ class ResponseToOccupationNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => $this->status == -1 ? 'There Is No Room Available Right Now Please Try Again Later.'
+            'message' => $this->status == -1 ? 'There Is No Meeting Room Available with requested type
+             Right Now Please Try Again Later.'
                 : "Your request's status had been updated to : " . $this->status,
-            'type' => "Response to Occupation Request",
+            'type' => "Response to Meeting Occupation Request",
             'request_id' => $this->request_id,
         ];
     }

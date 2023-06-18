@@ -3,20 +3,24 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Models\MeetingRoomOccupationRequest;
+use Illuminate\Notifications\Messages\MailMessage;
 
-class ResponseToOccupationNotification extends Notification
+class NewMeetingRoomOccupationRequest extends Notification
 {
     use Queueable;
 
-    public $status;
-    public $request_id;
-    public function __construct($status, $request_id)
+    /**
+     * Create a new notification instance.
+     *
+     * @return void
+     */
+    public $oRequerst;
+    public function __construct(MeetingRoomOccupationRequest $oRequerst)
     {
-        $this->status = $status;
-        $this->request_id = $request_id;
+        $this->oRequerst = $oRequerst;
     }
 
     /**
@@ -37,7 +41,6 @@ class ResponseToOccupationNotification extends Notification
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
 
-
     /**
      * Get the array representation of the notification.
      *
@@ -46,11 +49,11 @@ class ResponseToOccupationNotification extends Notification
      */
     public function toArray($notifiable)
     {
+        $type = $this->oRequerst->type;
         return [
-            'message' => $this->status == -1 ? 'There Is No Room Available Right Now Please Try Again Later.'
-                : "Your request's status had been updated to : " . $this->status,
-            'type' => "Response to Occupation Request",
-            'request_id' => $this->request_id,
+            'message' => "You have a new request to meeting room.",
+            'type' => "New Meeting Room Occupation Request for room type : $type",
+            'request_id' => $this->oRequerst->id,
         ];
     }
 }
