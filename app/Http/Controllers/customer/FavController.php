@@ -14,12 +14,16 @@ class FavController extends Controller
 {
     public function addToFav(AddFavRequest $request)
     {
-        CustomerFav::create($request->values());
+        try {
+            CustomerFav::create($request->values());
+        } catch (\Exception $e) {
+            return LocalResponse::returnMessage("this room already in this customer favourite");
+        }
         return LocalResponse::returnMessage('Added to fav');
     }
     public function reomveFromFav(RemoveFavRequest $request)
     {
-        $customer_fav = CustomerFav::where('room_id', $request->id)->where('user_id', Auth::user()->id)->first();
+        $customer_fav = CustomerFav::where('room_id', $request->room_id)->where('customer_id', Auth::user()->id)->first();
         $customer_fav->delete();
         return LocalResponse::returnMessage('Removed From fav');
     }

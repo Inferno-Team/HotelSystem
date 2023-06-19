@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 class CreateCustomerFavsTable extends Migration
 {
@@ -17,6 +18,7 @@ class CreateCustomerFavsTable extends Migration
             $table->id();
             $table->foreignId('customer_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('room_id')->references('id')->on('rooms')->cascadeOnDelete();
+            $table->unique(['customer_id', 'room_id']);
             $table->timestamps();
         });
     }
