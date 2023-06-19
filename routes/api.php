@@ -35,11 +35,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/add-new-employee', [\App\Http\Controllers\manager\HotelController::class, 'addNewEmployee']);
         Route::post('/add_new_room', [RoomController::class, 'addNewRoom']);
         Route::post('/add_new_meeting_room', [RoomController::class, 'addNewMeetingRoom']);
-        Route::get('/remove_data', function () {
+        Route::get('/remove_all', function () {
             GarageOccupationRequest::truncate();
+            RoomOccupationRequest::truncate();
             CustomerParking::truncate();
             CustomerRoom::truncate();
+        });
+        Route::get('/remove_park', function () {
+            GarageOccupationRequest::truncate();
+            CustomerParking::truncate();
+        });
+        Route::get('/remove_room', function () {
             RoomOccupationRequest::truncate();
+            CustomerRoom::truncate();
         });
     });
     Route::group(['middleware' => ['is_customer']], function () {

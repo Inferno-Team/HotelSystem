@@ -28,7 +28,7 @@ class RemoveFavRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:customer_favs,id',
+            'id' => 'required|exists:rooms,id',
         ];
     }
     protected function failedValidation(Validator $validator)

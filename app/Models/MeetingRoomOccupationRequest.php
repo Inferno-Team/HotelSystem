@@ -15,7 +15,6 @@ class MeetingRoomOccupationRequest extends Model
     protected $fillable = [
         "customer_id",
         "from",
-        "from",
         "to",
         "price",
         "type",

@@ -19,7 +19,7 @@ class FavController extends Controller
     }
     public function reomveFromFav(RemoveFavRequest $request)
     {
-        $customer_fav = CustomerFav::where('id', $request->id)->first();
+        $customer_fav = CustomerFav::where('room_id', $request->id)->where('user_id', Auth::user()->id)->first();
         $customer_fav->delete();
         return LocalResponse::returnMessage('Removed From fav');
     }
