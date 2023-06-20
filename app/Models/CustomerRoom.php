@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CustomerRoom extends Model
@@ -28,12 +29,12 @@ class CustomerRoom extends Model
             }
         );
     }
-    public function room(): HasOne
+    public function room(): BelongsTo
     {
-        return $this->hasOne(Room::class, 'room_id');
+        return $this->belongsTo(Room::class, 'room_id');
     }
-    public function customer(): HasOne
+    public function customer(): BelongsTo
     {
-        return $this->hasOne(User::class, 'customer_id');
+        return $this->belongsTo(User::class, 'customer_id');
     }
 }
