@@ -84,7 +84,7 @@ class HotelController extends Controller
         $customerParking  = CustomerParking::where('customer_id', $customer->id)->get()->filter(function ($park) {
             return $park->valid;
         })->values()->first();
-        $customerRooms = CustomerRoom::where('customer_id', $customer->id)->get()->filter(function ($item) {
+        $customerRooms = CustomerRoom::where('customer_id', $customer->id)->with('room')->get()->filter(function ($item) {
             return $item->valid;
         })->values();
         $meetingRoomCustomer = MeetingRoomCustomer::where('customer_id', $customer->id)->get()->filter(function ($item) {

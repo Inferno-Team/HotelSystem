@@ -29,7 +29,7 @@ class FavController extends Controller
     }
     public function getMyFav()
     {
-        $customer_favs = CustomerFav::where('customer_id', Auth::user()->id)->get();
+        $customer_favs = CustomerFav::where('customer_id', Auth::user()->id)->with('room')->get();
         return LocalResponse::returnData('favs', $customer_favs);
     }
 }
